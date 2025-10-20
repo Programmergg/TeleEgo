@@ -1,9 +1,21 @@
-<div style="display: flex; align-items: center;">
-  <img src="figs/TeleAI.jpg" width="80" style="margin-right:10px;">
-  <img src="figs/TelEGO.jpg" width="80" style="margin-right:10px;">
-</div>
+<p align="center">
+Code and data for TelEGO
+    </br>
+    <div align="center">
+      <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
+      <img src="figs/TelEGO.jpg" alt="Logo" style="width:15%; height:15%;">
+    </div>
+    </br>
+    <div align="center">
+        <a href="https://www.python.org/">
+            <img alt="Build" src="https://img.shields.io/badge/Python-3.8+-1f425f.svg?color=purple">
+        </a>
+        <a>
+            <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
+        </a>
+    </div>
+</p>
 
-## TelEGO
 
 ## Introduction
 
