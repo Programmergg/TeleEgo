@@ -1,5 +1,7 @@
+<div align="center">
+  <h1>Code and data for TeleEgo</h1>
+</div>
 <p align="center">
-Code and data for TeleEgo
     </br>
     <div align="center">
       <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
