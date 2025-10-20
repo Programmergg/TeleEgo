@@ -3,13 +3,11 @@
 ## Introduction
 
 **TeleEgo** is the first comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
-It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **episodic memory, contextual understanding, and cross-memory reasoning**.
-
-**Omni** here means that TeleEgo covers the full spectrum of **participants, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
+It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **episodic memory, contextual understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **participants, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
 
 TeleEgo provides:
 
-* **Omni-scale, rich, diverse egocentric data** collected from 5 participants across 5 daily scenarios (work/study, social interaction, shopping, health, and travel).
+* **Omni-scale, rich, diverse egocentric data** collected from 5 participants across 3 daily scenarios (work/study, social interaction, shopping, health, and travel).
 * **Multi-modal annotations**, including first-person video, narration, and speech transcripts.
 * **A fine-grained QA benchmark** with 3 cognitive dimensions and 11 subcategories, covering short-term/long-term/ultra-long memory, entity tracking, causal reasoning, intent inference, cross-event reasoning, and more.
 
@@ -29,7 +27,7 @@ TeleEgo provides:
 * **Modalities**:
 
   * Egocentric video streams
-  * Speech & conversations (transcribed and aligned)
+  * Speech & conversations
   * Narration and event descriptions
 
 ---
@@ -42,6 +40,7 @@ TeleEgo-QA evaluates models along **three main dimensions**:
 
    * Short-term Memory
    * Long-term Memory
+   * Ultra-long Memory
    * Entity Tracking
    * Temporal Comparison & Interval
 
@@ -167,7 +166,7 @@ If you use **TeleEgo** in your research, please cite:
 ## License
 
 This project is licensed under the **MIT License**.
-Dataset usage is restricted under a **research-only license**. See [LICENSE](LICENSE) for details.
+Dataset usage is restricted under a **research-only license**.
 
 ---
 
@@ -179,6 +178,6 @@ Dataset usage is restricted under a **research-only license**. See [LICENSE](LIC
 
 ---
 
-✨ **TeleEgo is an Omni benchmark — a step toward building AI assistants with true long-term memory and contextual reasoning in real-world wearable scenarios.**
+✨ **TeleEgo is an Omni benchmark, a step toward building AI assistants with true long-term memory and memory reasoning in real-world wearable scenarios.**
 
 ---
