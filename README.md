@@ -125,14 +125,27 @@ python evaluation/run_eval.py --model baseline_vlm --data_path ./data/sample
 ## 🤝 Collaborators
 
 Thanks to these amazing people for contributing to the project:
-<a href="[https://github.com/username1](https://github.com/rebeccaeexu)">
-  <img src="[https://avatars.githubusercontent.com/username1](https://github.com/rebeccaeexu)" width="60px" style="border-radius:50%" />
+
+<a href="https://github.com/rebeccaeexu">
+  <img src="https://avatars.githubusercontent.com/rebeccaeexu" width="60px" style="border-radius:50%" />
 </a>
-<a href="[https://github.com/username2](https://github.com/Programmergg)">
-  <img src="[https://avatars.githubusercontent.com/username2](https://github.com/Programmergg)" width="60px" style="border-radius:50%" />
+<a href="https://github.com/DavisWANG0">
+  <img src="https://avatars.githubusercontent.com/DavisWANG0" width="60px" style="border-radius:50%" />
 </a>
-<a href="[https://github.com/username3](https://github.com/Xiaolong-RRL)">
-  <img src="[https://avatars.githubusercontent.com/username3](https://github.com/Xiaolong-RRL)" width="60px" style="border-radius:50%" />
+<a href="https://github.com/H-oliday">
+  <img src="https://avatars.githubusercontent.com/H-oliday" width="60px" style="border-radius:50%" />
+</a>
+<a href="https://github.com/Xiaolong-RRL">
+  <img src="https://avatars.githubusercontent.com/Xiaolong-RRL" width="60px" style="border-radius:50%" />
+</a>
+<a href="https://github.com/Programmergg">
+  <img src="https://avatars.githubusercontent.com/Programmergg" width="60px" style="border-radius:50%" />
+</a>
+<a href="https://github.com/cocowy1">
+  <img src="https://avatars.githubusercontent.com/cocowy1" width="60px" style="border-radius:50%" />
+</a>
+<a href="https://github.com/chxy95">
+  <img src="https://avatars.githubusercontent.com/chxy95" width="60px" style="border-radius:50%" />
 </a>
 
 
