@@ -1,14 +1,15 @@
 <p align="center">
-Code and data for TelEGO
+Code and data for TeleEgo
     </br>
     <div align="center">
       <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
+      <img src="figs/TeleEgo.jpg" alt="Logo" style="width:15%; height:15%;">
       <img src="figs/TelEGO.jpg" alt="Logo" style="width:13%; height:13%;">
     </div>
     </br>
     <div align="center">
         <a href="https://www.python.org/">
-            <img alt="Build" src="https://img.shields.io/badge/Python-3.8+-1f425f.svg?color=purple">
+            <img alt="Build" src="https://img.shields.io/badge/Python-3.10+-1f425f.svg?color=purple">
         </a>
         <a>
             <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
@@ -16,8 +17,7 @@ Code and data for TelEGO
     </div>
 </p>
 
-
-## Introduction
+# Introduction
 
 **TeleEgo** is the first comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
 It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **episodic memory, contextual understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **participants, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
