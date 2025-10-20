@@ -122,6 +122,20 @@ python evaluation/run_eval.py --model baseline_vlm --data_path ./data/sample
 
 ---
 
+## 🤝 Collaborators
+
+Thanks to these amazing people for contributing to the project:
+<a href="[https://github.com/username1](https://github.com/rebeccaeexu)">
+  <img src="[https://avatars.githubusercontent.com/username1](https://github.com/rebeccaeexu)" width="60px" style="border-radius:50%" />
+</a>
+<a href="[https://github.com/username2](https://github.com/Programmergg)">
+  <img src="[https://avatars.githubusercontent.com/username2](https://github.com/Programmergg)" width="60px" style="border-radius:50%" />
+</a>
+<a href="[https://github.com/username3](https://github.com/Xiaolong-RRL)">
+  <img src="[https://avatars.githubusercontent.com/username3](https://github.com/Xiaolong-RRL)" width="60px" style="border-radius:50%" />
+</a>
+
+
 ## Citation
 
 If you use **TeleEgo** in your research, please cite:
