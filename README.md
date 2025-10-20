@@ -3,8 +3,8 @@ Code and data for TeleEgo
     </br>
     <div align="center">
       <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
-      <img src="figs/TeleEgo.jpg" alt="Logo" style="width:15%; height:15%;">
-      <img src="figs/TelEGO.jpg" alt="Logo" style="width:13%; height:13%;">
+      <img src="figs/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
+      <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;">
     </div>
     </br>
     <div align="center">
