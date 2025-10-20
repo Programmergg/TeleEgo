@@ -3,7 +3,7 @@ Code and data for TelEGO
     </br>
     <div align="center">
       <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
-      <img src="figs/TelEGO.jpg" alt="Logo" style="width:16%; height:16%;">
+      <img src="figs/TelEGO.jpg" alt="Logo" style="width:13%; height:13%;">
     </div>
     </br>
     <div align="center">
