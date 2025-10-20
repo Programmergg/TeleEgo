@@ -1,4 +1,5 @@
-# TeleEgo
+# <img src="https://example.com/logo.png" width="30" style="vertical-align:middle;"> TeleEgo
+
 
 ## Introduction
 
