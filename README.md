@@ -1,4 +1,14 @@
-# <img src="https://example.com/logo.png" width="30" style="vertical-align:middle;"> TeleEgo
+<table border="0" cellspacing="0" cellpadding="0" style="border:none;">
+  <tr>
+    <td style="border:none;"><img src="figs/TeleAI.jpg" width="80"></td>
+    <td style="border:none;"><img src="figs/TelEGO.jpg" width="80"></td>
+    <td style="border:none; vertical-align: middle;">
+      <span style="font-size:22px; font-weight:bold;">TeleEgo</span>
+    </td>
+  </tr>
+</table>
+
+
 
 
 ## Introduction
