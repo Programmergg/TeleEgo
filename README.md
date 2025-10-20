@@ -159,6 +159,9 @@ Thanks to these amazing people for contributing to the project:
 <a href="https://github.com/Programmergg">
   <img src="https://avatars.githubusercontent.com/Programmergg" width="60px" style="border-radius:50%" />
 </a>
+<a href="https://github.com/yiheng-wang-duke">
+  <img src="https://avatars.githubusercontent.com/yiheng-wang-duke" width="60px" style="border-radius:50%" />
+</a>
 <a href="https://github.com/cocowy1">
   <img src="https://avatars.githubusercontent.com/cocowy1" width="60px" style="border-radius:50%" />
 </a>
