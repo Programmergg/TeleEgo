@@ -34,7 +34,7 @@ TeleEgo provides:
 
 ## Dataset Overview
 
-* **Participants**: 5 (balanced gender, diverse cultural backgrounds)
+* **Participants**: 5 (balanced gender)
 * **Scenarios**:
 
   * work & study
