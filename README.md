@@ -26,7 +26,7 @@ It reflects realistic personal assistant scenarios where continuous first-person
 
 TeleEgo provides:
 
-* **Omni-scale, rich, diverse egocentric data** collected from 5 participants across 3 daily scenarios (work/study, social interaction, shopping, health, and travel).
+* **Omni-scale, rich, diverse egocentric data** collected from 5 participants across 3 daily scenarios.
 * **Multi-modal annotations**, including first-person video, narration, and speech transcripts.
 * **A fine-grained QA benchmark** with 3 cognitive dimensions and 11 subcategories, covering short-term/long-term/ultra-long memory, entity tracking, causal reasoning, intent inference, cross-event reasoning, and more.
 
