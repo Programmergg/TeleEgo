@@ -123,7 +123,7 @@ python TeleEgo_gpt4o_eval.py
 
 ## Baselines
 ![Baseline 1](figs/baseline1.png)
-![Baseline 2](figs/image2.png)
+![Baseline 2](figs/baseline2.png)
 ---
 
 ## 🤝 Collaborators
