@@ -22,13 +22,13 @@
 # Introduction
 
 **TeleEgo** is the first comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
-It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **episodic memory, contextual understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **participants, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
+It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **memory, understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **roles, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
 
 TeleEgo provides:
 
-* **Omni-scale, rich, diverse egocentric data** collected from 5 participants across 3 daily scenarios.
+* **Omni-scale, rich, diverse egocentric data** collected from 5 roles across 3 daily scenarios.
 * **Multi-modal annotations**, including first-person video, narration, and speech transcripts.
-* **A fine-grained QA benchmark** with 3 cognitive dimensions and 11 subcategories, covering short-term/long-term/ultra-long memory, entity tracking, causal reasoning, intent inference, cross-event reasoning, and more.
+* **A fine-grained QA benchmark** with 3 cognitive dimensions and 12 subcategories, covering short-term/long-term/ultra-long memory, entity tracking, causal reasoning, intent inference, cross-event reasoning, and more.
 
 ---
 
@@ -41,7 +41,7 @@ TeleEgo provides:
   * lifestyle & routines
   * social activities
   * outings & culture
-* **Recording**: 3 days per participant, \~15 hours total per participant
+* **Recording**: 3 days per participant, \~14.4 hours total per participant
 * **Modalities**:
 
   * Egocentric video streams
@@ -77,7 +77,7 @@ TeleEgo-QA evaluates models along **three main dimensions**:
 
 Each QA instance is labeled with:
 
-* **Question type** (Single-choice, Multiple-choice, True/False, Open-ended)
+* **Question type** (Multi-choice Single-answer, Multi-choice Multi-answer, Binary, Open-ended)
 
 ---
 
