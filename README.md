@@ -95,43 +95,28 @@ Each QA instance is labeled with:
 ```
 TeleEgo/
 │
-├── data/                 # Dataset samples / metadata (link provided separately)
-├── tasks/                # Benchmark task definitions
-├── evaluation/           # Evaluation scripts
-├── baseline_models/      # Example model scripts
-├── docs/                 # Documentation and detailed reports
-└── README.md             # This file
+├── teleego_data/                # Dataset samples / metadata (link provided separately)
+├── weights/                     # Pre-trained weights (MiniCPM-o, Qwen2.5-Omni, ...)
+├── TeleEgo_gemini25_pro_eval.py # Evaluation scripts
+├── TeleEgo_gpt4o_eval.py        # Evaluation scripts
+├── TeleEgo_minicpm_eval.py      # Evaluation scripts
+├── TeleEgo_qwen25_eval.py       # Evaluation scripts
+├── TeleEgo_qweno25_eval.py      # Evaluation scripts
+├── TeleEgo_videochat_eval.py    # Evaluation scripts
+└── README.md                    # This file
 ```
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/<your-org>/TeleEgo.git
-cd TeleEgo
-pip install -r requirements.txt
-```
-
----
 
 ## Usage
 
 ### Dataset Access
 
 Due to privacy and licensing constraints, please request dataset access here:
-👉 [Dataset Access Form](https://your-dataset-link)
+👉 [Dataset Access Form](https://huggingface.co/datasets/David0219/TeleEgo)
 
 ### Running Evaluation
 
 ```bash
-python evaluation/run_eval.py --model <model_name> --data_path <path_to_data>
-```
-
-### Example
-
-```bash
-python evaluation/run_eval.py --model baseline_vlm --data_path ./data/sample
+python TeleEgo_gpt4o_eval.py
 ```
 
 ---
