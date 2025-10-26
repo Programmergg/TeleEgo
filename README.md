@@ -37,11 +37,10 @@ TeleEgo provides:
 * **Participants**: 5 (balanced gender, diverse cultural backgrounds)
 * **Scenarios**:
 
-  * Work & Study
-  * Social Activities
-  * Shopping
-  * Health Management
-  * Travel & Exploration
+  * work & study
+  * lifestyle & routines
+  * social activities
+  * outings & culture
 * **Recording**: 3 days per participant, \~15 hours total per participant
 * **Modalities**:
 
@@ -55,7 +54,7 @@ TeleEgo provides:
 
 TeleEgo-QA evaluates models along **three main dimensions**:
 
-1. **Episodic Memory Modeling**
+1. **Memory**
 
    * Short-term Memory
    * Long-term Memory
@@ -63,7 +62,7 @@ TeleEgo-QA evaluates models along **three main dimensions**:
    * Entity Tracking
    * Temporal Comparison & Interval
 
-2. **Contextual & Intentional Comprehension**
+2. **Understanding**
 
    * Causal Understanding
    * Intent Inference
@@ -78,7 +77,6 @@ TeleEgo-QA evaluates models along **three main dimensions**:
 
 Each QA instance is labeled with:
 
-* **Difficulty level** (Easy, Medium, Hard)
 * **Question type** (Single-choice, Multiple-choice, True/False, Open-ended)
 
 ---
