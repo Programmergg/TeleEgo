@@ -1,109 +1,89 @@
 <div align="center">
-    <!-- <img src="assets/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;"> -->
-    <!-- <img src="assets/TeleEgo.png" alt="Logo" style="width:15%; height:15%;"> -->
-    <!-- <img src="assets/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;"> -->
-<h1>
+  <h1>
     TeleEgo: <br> 
     Benchmarking Egocentric AI Assistants in the Wild
-</h1>
-</div>
+  </h1>
 
-<p align="center">
-  <div align="center">
-    <!-- <a href="https://www.python.org/">
-      <img alt="Build" src="https://img.shields.io/badge/Python-3.10+-1f425f.svg?color=purple">
-    </a> -->
-    <!-- <a>
-      <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
-    </a> -->
-    <!-- 新增 arXiv 徽章 -->
-    <a href="https://arxiv.org/abs/2510.23981">
-      <img alt="arXiv" src="https://img.shields.io/badge/ArXiv-2510.23981-b31b1b.svg">
-    </a>
-    <!-- 新增 Hugging Face 徽章 -->
+  <!-- 项目徽章 -->
+  <p>
     <a href="https://huggingface.co/datasets/David0219/TeleEgo">
       <img alt="Hugging Face" src="https://img.shields.io/badge/HuggingFace-Dataset-orange">
     </a>
-    <!-- 新增 Project Page 网站徽章 -->
+    <a href="https://arxiv.org/abs/2510.23981">
+      <img alt="arXiv" src="https://img.shields.io/badge/ArXiv-2510.23981-b31b1b.svg">
+    </a>
     <a href="https://programmergg.github.io/jrliu.github.io/">
       <img alt="Page" src="https://img.shields.io/badge/Project Page-Link-green">
     </a>
-  </div>
+  </p>
 
+  <img src="assets/teaser.png" alt="Teaser" style="width:80%; max-width:700px;">
+</div>
 
-![teaser.png](assets/teaser.png)
-</p>
-
-# Introduction
+## 📌 Introduction
 
 **TeleEgo** is a comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
 It reflects realistic personal assistant scenarios where continuous egocentric video data is collected across hours or even days, requiring models to maintain and reason over **memory, understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **roles, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for egocentric AI assistants.
 
-TeleEgo provides:
+**TeleEgo provides:**
 
-* **Omni-scale, rich, diverse egocentric data** collected from 5 roles across 3 daily scenarios.
-* **Multi-modal annotations**, including first-person video, narration, and speech transcripts.
-* **A fine-grained QA benchmark** with 3 cognitive dimensions and 12 subcategories, covering short-term/long-term/ultra-long memory, entity tracking, causal reasoning, intent inference, cross-event reasoning, and more.
+- 🧠 **Omni-scale, diverse egocentric data** from 5 roles across 4 daily scenarios.
+- 🎤 **Multi-modal annotations**: video, narration, and speech transcripts.
+- ❓ **Fine-grained QA benchmark**: 3 cognitive dimensions, 12 subcategories.
 
----
-
-## Dataset Overview
-
-* **Participants**: 5 (balanced gender)
-* **Scenarios**:
-
-  * work & study
-  * lifestyle & routines
-  * social activities
-  * outings & culture
-* **Recording**: 3 days per participant, \~14.4 hours total per participant
-* **Modalities**:
-
-  * Egocentric video streams
-  * Speech & conversations
-  * Narration and event descriptions
 
 ---
 
-## Benchmark Tasks
+## 📊 Dataset Overview
+
+- **Participants**: 5 (balanced gender)
+- **Scenarios**:
+  - Work & Study
+  - Lifestyle & Routines
+  - Social Activities
+  - Outings & Culture
+- **Recording**: 3 days/participant (~14.4 hours each)
+- **Modalities**:
+  - Egocentric video streams
+  - Speech & conversations
+  - Narration and event descriptions
+
+---
+
+## 🧪 Benchmark Tasks
 
 TeleEgo-QA evaluates models along **three main dimensions**:
 
 1. **Memory**
-
-   * Short-term Memory
-   * Long-term Memory
-   * Ultra-long Memory
-   * Entity Tracking
-   * Temporal Comparison & Interval
+   - Short-term / Long-term / Ultra-long Memory
+   - Entity Tracking
+   - Temporal Comparison & Interval
 
 2. **Understanding**
-
-   * Causal Understanding
-   * Intent Inference
-   * Multi-step Reasoning
-   * Cross-modal Understanding
+   - Causal Understanding
+   - Intent Inference
+   - Multi-step Reasoning
+   - Cross-modal Understanding
 
 3. **Cross-Memory Reasoning**
+   - Cross-temporal Causality
+   - Cross-entity Relation
+   - Temporal Chain Understanding
 
-   * Cross-temporal Causality
-   * Cross-entity Relation
-   * Temporal Chain Understanding
+Each QA instance includes:
 
-Each QA instance is labeled with:
-
-* **Question type** (Multi-choice Single-answer, Multi-choice Multi-answer, Binary, Open-ended)
+- Question type: Single-choice, Multi-choice, Binary, Open-ended
 
 ---
 
-## Key Advantages over Existing Benchmarks
+<!-- ## Key Advantages over Existing Benchmarks
 
 * **Compared with EgoLife**: TeleEgo offers **omni-scenario coverage** (not restricted to a single shared environment), broader task diversity, fine-grained memory categories, multi-task trajectories, and difficulty levels.
 * **Compared with M3-Agent / HourVideo**: TeleEgo is explicitly **omni-task and omni-modal**, focusing on **diagnostic memory evaluation**, cross-event reasoning, and multimodal grounding in **real-life egocentric settings**.
 
----
+--- -->
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 ```
 TeleEgo/
@@ -119,14 +99,14 @@ TeleEgo/
 └── README.md                    # This file
 ```
 
-## Usage
+## 🚀 Usage
 
-### Dataset Access
+### 📥 Dataset Access
 
-Due to privacy and licensing constraints, please request dataset access here:
-👉 [Dataset Access Form](https://huggingface.co/datasets/David0219/TeleEgo)
+Due to privacy and licensing constraints, please request access here:
+👉 [**Dataset Access Form**](https://huggingface.co/datasets/David0219/TeleEgo)
 
-### Running Evaluation
+### 🧪 Running Evaluations
 
 ```bash
 python TeleEgo_gpt4o_eval.py
@@ -134,7 +114,7 @@ python TeleEgo_gpt4o_eval.py
 
 ---
 
-## Baselines
+<!-- ## Baselines
 ![Baseline 1](assets/res1.png)
 ![Baseline 2](assets/res2.png)
 ---
@@ -166,12 +146,12 @@ Thanks to these amazing people for contributing to the project:
 </a>
 <a href="https://github.com/chxy95">
   <img src="https://avatars.githubusercontent.com/chxy95" width="60px" style="border-radius:50%" />
-</a>
+</a> -->
 
 
-## Citation
+## 📜 Citation
 
-If you use **TeleEgo** in your research, please cite:
+If you find our **TeleEgo** in your research, please cite:
 
 ```bibtex
 @misc{yan2025teleegobenchmarkingegocentricai,
@@ -185,27 +165,36 @@ If you use **TeleEgo** in your research, please cite:
 }
 ```
 
----
-
-## License
+## 🪪 License
 
 This project is licensed under the **MIT License**.
 Dataset usage is restricted under a **research-only license**.
 
 ---
 
-## References
+<!-- ## References
 
 * EgoLife: Towards Egocentric Life Assistant [\[arXiv:2503.03803\]](https://arxiv.org/abs/2503.03803)
 * M3-Agent: Seeing, Listening, Remembering, and Reasoning [\[arXiv:2508.09736\]](https://arxiv.org/abs/2508.09736)
-* HourVideo: 1-Hour Video-Language Understanding [\[arXiv:2411.04998\]](https://arxiv.org/abs/2411.04998)
+* HourVideo: 1-Hour Video-Language Understanding [\[arXiv:2411.04998\]](https://arxiv.org/abs/2411.04998) -->
+
+
+## 📬 Contact
+
+If you have any questions, please feel free to reach out: chxy95@gmail.com.
 
 ---
 
-✨ **TeleEgo is an Omni benchmark, a step toward building AI assistants with true long-term memory and memory reasoning in real-world wearable scenarios.**
-
----
 <div align="center">
-    <img src="assets/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
-    <img src="assets/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
+
+<strong>✨ TeleEgo is an Omni benchmark, a step toward building AI assistants with true long-term memory and memory reasoning in real-world wearable scenarios. ✨</strong>
+
+</div>
+
+<!-- <br/> -->
+
+<div align="center" style="margin-top: 10px;">
+  <img src="assets/TeleAI.jpg" alt="TeleAI Logo" width="120px" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="assets/TeleEgo.png" alt="TeleEgo Logo" width="120px" />
 </div>
