@@ -1,23 +1,37 @@
 <div align="center">
   <h1>TeleEgo: Benchmarking Egocentric AI Assistants in the Wild</h1>
 </div>
+
 <p align="center">
-    </br>
-    <div align="center">
-      <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
-      <img src="figs/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
-      <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;">
-    </div>
-    </br>
-    <div align="center">
-        <a href="https://www.python.org/">
-            <img alt="Build" src="https://img.shields.io/badge/Python-3.10+-1f425f.svg?color=purple">
-        </a>
-        <a>
-            <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
-        </a>
-    </div>
+  <br/>
+  <div align="center">
+    <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
+    <img src="figs/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
+    <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;">
+  </div>
+  <br/>
+  <div align="center">
+    <a href="https://www.python.org/">
+      <img alt="Build" src="https://img.shields.io/badge/Python-3.10+-1f425f.svg?color=purple">
+    </a>
+    <a>
+      <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
+    </a>
+    <!-- 新增 arXiv 徽章 -->
+    <a href="https://arxiv.org/abs/2510.23981">
+      <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2510.23981-b31b1b.svg">
+    </a>
+    <!-- 新增 Hugging Face 徽章 -->
+    <a href="https://huggingface.co/datasets/David0219/TeleEgo">
+      <img alt="Hugging Face" src="https://img.shields.io/badge/HuggingFace-Dataset-orange">
+    </a>
+    <!-- 新增 Demo 网站徽章 -->
+    <a href="https://programmergg.github.io/jrliu.github.io/">
+      <img alt="Demo" src="https://img.shields.io/badge/Demo-online-green">
+    </a>
+  </div>
 </p>
+
 
 # Introduction
 
@@ -159,11 +173,14 @@ Thanks to these amazing people for contributing to the project:
 If you use **TeleEgo** in your research, please cite:
 
 ```bibtex
-@article{teleego2025,
-  title   = {TeleEgo},
-  author  = {Your Team Names},
-  journal = {arXiv preprint arXiv:xxxx.xxxxx},
-  year    = {2025}
+@misc{yan2025teleegobenchmarkingegocentricai,
+      title={TeleEgo: Benchmarking Egocentric AI Assistants in the Wild}, 
+      author={Jiaqi Yan and Ruilong Ren and Jingren Liu and Shuning Xu and Ling Wang and Yiheng Wang and Yun Wang and Long Zhang and Xiangyu Chen and Changzhi Sun and Jixiang Luo and Dell Zhang and Hao Sun and Chi Zhang and Xuelong Li},
+      year={2025},
+      eprint={2510.23981},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2510.23981}, 
 }
 ```
 
