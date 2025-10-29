@@ -7,7 +7,7 @@
   <div align="center">
     <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
     <img src="figs/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
-    <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;">
+    <!-- <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;"> -->
   </div>
   <br/>
   <div align="center">
@@ -134,8 +134,8 @@ python TeleEgo_gpt4o_eval.py
 ---
 
 ## Baselines
-![Baseline 1](figs/baseline1.png)
-![Baseline 2](figs/baseline2.png)
+![Baseline 1](figs/res1.png)
+![Baseline 2](figs/res2.png)
 ---
 
 ## 🤝 Collaborators
