@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Code and data for TeleEgo</h1>
+  <h1>TeleEgo: Benchmarking Egocentric AI Assistants in the Wild</h1>
 </div>
 <p align="center">
     </br>
