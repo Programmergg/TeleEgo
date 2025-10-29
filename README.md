@@ -1,42 +1,43 @@
 <div align="center">
-  <h1>TeleEgo: Benchmarking Egocentric AI Assistants in the Wild</h1>
+    <!-- <img src="assets/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;"> -->
+    <!-- <img src="assets/TeleEgo.png" alt="Logo" style="width:15%; height:15%;"> -->
+    <!-- <img src="assets/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;"> -->
+<h1>
+    TeleEgo: <br> 
+    Benchmarking Egocentric AI Assistants in the Wild
+</h1>
 </div>
 
 <p align="center">
-  <br/>
   <div align="center">
-    <img src="figs/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
-    <img src="figs/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
-    <!-- <img src="figs/TelEGO.jpg" alt="Logo" style="width:12.5%; height:12.5%;"> -->
-  </div>
-  <br/>
-  <div align="center">
-    <a href="https://www.python.org/">
+    <!-- <a href="https://www.python.org/">
       <img alt="Build" src="https://img.shields.io/badge/Python-3.10+-1f425f.svg?color=purple">
-    </a>
-    <a>
+    </a> -->
+    <!-- <a>
       <img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow">
-    </a>
+    </a> -->
     <!-- 新增 arXiv 徽章 -->
     <a href="https://arxiv.org/abs/2510.23981">
-      <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2510.23981-b31b1b.svg">
+      <img alt="arXiv" src="https://img.shields.io/badge/ArXiv-2510.23981-b31b1b.svg">
     </a>
     <!-- 新增 Hugging Face 徽章 -->
     <a href="https://huggingface.co/datasets/David0219/TeleEgo">
       <img alt="Hugging Face" src="https://img.shields.io/badge/HuggingFace-Dataset-orange">
     </a>
-    <!-- 新增 Demo 网站徽章 -->
+    <!-- 新增 Project Page 网站徽章 -->
     <a href="https://programmergg.github.io/jrliu.github.io/">
-      <img alt="Demo" src="https://img.shields.io/badge/Demo-online-green">
+      <img alt="Page" src="https://img.shields.io/badge/Project Page-Link-green">
     </a>
   </div>
-</p>
 
+
+![teaser.png](assets/teaser.png)
+</p>
 
 # Introduction
 
-**TeleEgo** is the first comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
-It reflects realistic personal assistant scenarios where continuous first-person video data is collected across hours or even days, requiring models to maintain and reason over **memory, understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **roles, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for embodied AI assistants.
+**TeleEgo** is a comprehensive **omni benchmark** designed for **multi-person, multi-scene, multi-task, and multimodal long-term memory reasoning** in egocentric video streams.
+It reflects realistic personal assistant scenarios where continuous egocentric video data is collected across hours or even days, requiring models to maintain and reason over **memory, understanding, and cross-memory reasoning**. **Omni** here means that TeleEgo covers the full spectrum of **roles, scenes, tasks, modalities, and memory horizons**, offering all-round evaluation for egocentric AI assistants.
 
 TeleEgo provides:
 
@@ -134,8 +135,8 @@ python TeleEgo_gpt4o_eval.py
 ---
 
 ## Baselines
-![Baseline 1](figs/res1.png)
-![Baseline 2](figs/res2.png)
+![Baseline 1](assets/res1.png)
+![Baseline 2](assets/res2.png)
 ---
 
 ## 🤝 Collaborators
@@ -204,3 +205,7 @@ Dataset usage is restricted under a **research-only license**.
 ✨ **TeleEgo is an Omni benchmark, a step toward building AI assistants with true long-term memory and memory reasoning in real-world wearable scenarios.**
 
 ---
+<div align="center">
+    <img src="assets/TeleAI.jpg" alt="Logo" style="width:15%; height:15%;">
+    <img src="assets/TeleEgo.png" alt="Logo" style="width:15%; height:15%;">
+</div>
