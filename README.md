@@ -108,13 +108,15 @@ TeleEgo/
 ### 📥 Dataset Access
 
 Due to privacy and licensing constraints, please request access here:
-👉 [**Dataset Access Form**](https://huggingface.co/datasets/David0219/TeleEgo)
+📝 [**Dataset Access Form**](https://huggingface.co/datasets/David0219/TeleEgo).
 
 ### 🧪 Running Evaluations
 
 ```bash
 python TeleEgo_gpt4o_eval.py
 ```
+
+Submit your results to our 🏆 [**Online Leaderboard**](https://programmergg.github.io/jrliu.github.io/#leaderboard).
 
 ---
 
