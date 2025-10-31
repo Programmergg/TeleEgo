@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleEgo: Benchmarking Egocentric AI Assistants in the Wild</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --hover-shadow: 0 20px 60px rgba(37,99,235,0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--light-bg);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            color: #ffffff;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        .hero .description {
+            font-size: 1.1em;
+            max-width: 900px;
+            margin: 30px auto;
+            line-height: 1.8;
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            border: 1px solid rgba(255,255,255,0.4);
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.05em;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 20px 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background: rgba(37,99,235,0.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+        }
+
+        .alt-bg {
+            background: white;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            margin: 20px auto 40px;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            color: var(--text-light);
+        }
+
+        /* Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Leaderboard */
+        .leaderboard-section {
+            margin: 60px 0;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .leaderboard-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .leaderboard-header h3 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .leaderboard-description {
+            font-size: 1.05em;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .table-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .table-wrapper th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 18px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1em;
+            border: none;
+        }
+
+        .table-wrapper th small {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+
+        .table-wrapper td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--text-dark);
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .table-wrapper tbody tr {
+            transition: all 0.3s;
+        }
+
+        .table-wrapper tbody tr:hover {
+            background: rgba(37,99,235,0.05);
+            transform: scale(1.01);
+        }
+
+        .table-wrapper tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .model-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: left;
+        }
+
+        /* Top 3 Ranking Styles */
+        .rank-1 {
+            background: linear-gradient(90deg, rgba(255,215,0,0.15), transparent);
+        }
+
+        .rank-1 td:first-child {
+            font-size: 1.2em;
+            font-weight: 800;
+        }
+
+        .rank-1 .model-name {
+            color: #d97706;
+            font-size: 1.1em;
+        }
+
+        .rank-2 {
+            background: linear-gradient(90deg, rgba(192,192,192,0.15), transparent);
+        }
+
+        .rank-2 td:first-child {
+            font-size: 1.15em;
+            font-weight: 800;
+        }
+
+        .rank-2 .model-name {
+            color: #6b7280;
+            font-size: 1.05em;
+        }
+
+        .rank-3 {
+            background: linear-gradient(90deg, rgba(205,127,50,0.15), transparent);
+        }
+
+        .rank-3 td:first-child {
+            font-size: 1.1em;
+            font-weight: 800;
+        }
+
+        .rank-3 .model-name {
+            color: #92400e;
+            font-size: 1.05em;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .rank-badge.silver {
+            background: linear-gradient(135deg, #d1d5db, #9ca3af);
+        }
+
+        .rank-badge.bronze {
+            background: linear-gradient(135deg, #fca5a5, #f87171);
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin: 40px 0;
+        }
+
+        .leaderboard-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+
+        .leaderboard-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            color: var(--text-dark);
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(37,99,235,0.05);
+        }
+
+        /* Metrics */
+        .metric-card {
+            background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .metric-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .metric-formula {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            border: 2px dashed var(--primary-color);
+            color: var(--text-dark);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(37,99,235,0.3);
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 55%;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: var(--hover-shadow);
+        }
+
+        /* Code blocks */
+        pre {
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 15px;
+            overflow-x: auto;
+            margin: 30px 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .code-comment {
+            color: #10b981;
+        }
+
+        /* Citation Box */
+        .citation-box {
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-color);
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: var(--card-shadow);
+        }
+
+        .citation-box code {
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Submit Section Styles */
+        .submit-method {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            margin: 30px 0;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .submit-method:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .submit-method h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .submit-method .method-icon {
+            font-size: 2em;
+        }
+
+        .submit-steps {
+            background: rgba(37,99,235,0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .submit-steps ol {
+            margin-left: 20px;
+            line-height: 2;
+        }
+
+        .submit-steps li {
+            margin: 10px 0;
+            color: var(--text-dark);
+        }
+
+        .submit-steps code {
+            background: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+
+        .requirements-box {
+            background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(37,99,235,0.1));
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-color);
+            margin: 20px 0;
+        }
+
+        .requirements-box h4 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .requirements-box ul {
+            margin-left: 20px;
+            line-height: 2;
+        }
+
+        .requirements-box li {
+            color: var(--text-dark);
+        }
+
+        .json-example {
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .json-key {
+            color: #fbbf24;
+        }
+
+        .json-string {
+            color: #10b981;
+        }
+
+        .json-number {
+            color: #818cf8;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box strong {
+            color: #d97706;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .footer-links li {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-icon {
+                left: 30px;
+                transform: none;
+            }
+
+            .timeline-content {
+                width: calc(100% - 100px);
+                margin-left: 100px !important;
+                margin-right: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                text-align: center;
+            }
+        }
+
+        /* ========= Added: Force 4-up layout for scenarios grid ========= */
+        .feature-grid.scenarios {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-grid.scenarios {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid.scenarios {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ======== End added styles ======== */
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>TeleEgo Benchmark</h1>
+            <div class="subtitle">Live-in-the-Wild Personal Assistant Benchmark</div>
+            <!-- <p class="description">
+                A comprehensive benchmark for evaluating AI personal assistants in real-world, continuous streaming scenarios 
+                with multi-modal perception and long-term memory capabilities.
+            </p> -->
+            
+            <div class="hero-badges">
+                <span class="badge">🎥 Egocentric Video</span>
+                <span class="badge">🔊 Multi-Modal Audio</span>
+                <span class="badge">⏱️ Real-Time Processing</span>
+                <span class="badge">🧠 Long-Term Memory</span>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://arxiv.org/abs/YOUR_PAPER_ID" class="btn" target="_blank">
+                    📄 Paper
+                </a>
+                <a href="https://github.com/Programmergg/TeleEgo" class="btn" target="_blank">
+                    💻 GitHub
+                </a>
+                <a href="https://huggingface.co/datasets/David0219/TeleEgo" class="btn" target="_blank">
+                    🤗 Dataset
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#leaderboard">Leaderboard</a></li>
+            <li><a href="#metrics">Evaluation</a></li>
+            <li><a href="#dataset">Dataset</a></li>
+            <li><a href="#submit">Submit</a></li>
+            <li><a href="#citation">Citation</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview">
+        <div class="container">
+            <h2>Why TeleEgo?</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 60px; font-size: 1.15em;">
+                Existing benchmarks evaluate AI assistants on curated, short-duration clips. 
+                <strong>TeleEgo</strong> challenges models with <strong>real-world, continuous streams</strong> 
+                spanning hours of daily activities across diverse scenarios.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🌍</span>
+                    <h4>Real-World Complexity</h4>
+                    <p>Authentic egocentric recordings from real users performing daily activities across work, study, social, shopping, health, and travel scenarios.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🎬</span>
+                    <h4>Streaming Protocol</h4>
+                    <p>Questions arrive dynamically throughout the video stream, mimicking real personal assistant interactions without pre-segmentation.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🧩</span>
+                    <h4>Multi-Modal Integration</h4>
+                    <p>Combines egocentric video, ambient audio, speech transcripts, and visual narrations requiring cross-modal reasoning.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">⏳</span>
+                    <h4>Long-Horizon Memory</h4>
+                    <p>Tests model's ability to retain and recall information across extended time periods, from seconds to hours.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">⚡</span>
+                    <h4>Real-Time Constraints</h4>
+                    <p>Models must respond within decision windows, reflecting the temporal demands of live assistance.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">📊</span>
+                    <h4>Verifiable Evidence</h4>
+                    <p>Every answer requires precise temporal and modality grounding, enabling auditable evaluation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="alt-bg">
+        <div class="container">
+            <h2>Leaderboard</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 60px; font-size: 1.1em;">
+                Comprehensive evaluation results on TeleEgo benchmark. Models are tested on both Test Set A (public) and Test Set B (hidden).
+            </p>
+
+            <!-- Test Set A Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-header">
+                    <h3>🏆 Test Set A (Public Leaderboard)</h3>
+                    <p class="leaderboard-description">
+                        Public test set with released ground truth. Models can be fine-tuned and optimized on this set.
+                    </p>
+                </div>
+
+                <div class="table-wrapper fade-in">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Model</th>
+                                <th>Memory<br><small>(Avg %)</small></th>
+                                <th>Understanding<br><small>(Avg %)</small></th>
+                                <th>Cross-Memory<br><small>(Avg %)</small></th>
+                                <th>Overall<br><small>(Avg %)</small></th>
+                                <th>MPT<br><small>(minutes)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1">
+                                <td>🥇 1</td>
+                                <td class="model-name">GPT-4o</td>
+                                <td>42.69</td>
+                                <td>60.92</td>
+                                <td>45.87</td>
+                                <td>48.04</td>
+                                <td>3.01</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td>🥈 2</td>
+                                <td class="model-name">Gemini-2.5-Pro</td>
+                                <td>42.23</td>
+                                <td>57.98</td>
+                                <td>40.26</td>
+                                <td>46.35</td>
+                                <td>2.76</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="model-name">MiniCPM-o</td>
+                                <td>40.36</td>
+                                <td>50.19</td>
+                                <td>38.28</td>
+                                <td>42.84</td>
+                                <td>2.19</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="model-name">Qwen2.5-VL-2.5</td>
+                                <td>34.24</td>
+                                <td>35.89</td>
+                                <td>27.39</td>
+                                <td>33.96</td>
+                                <td>1.60</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="model-name">Videochat-Online</td>
+                                <td>28.91</td>
+                                <td>41.76</td>
+                                <td>29.04</td>
+                                <td>32.46</td>
+                                <td>1.33</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="model-name">Qwen2.5-Omni</td>
+                                <td>25.34</td>
+                                <td>27.33</td>
+                                <td>20.13</td>
+                                <td>25.33</td>
+                                <td>1.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Test Set B Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-header">
+                    <h3>🔒 Test Set B (Hidden Test Set) Continue...</h3>
+                    <p class="leaderboard-description">
+                        Hidden test set for unbiased evaluation. Ground truth is not released. Submit your model predictions for evaluation.
+                    </p>
+                </div>
+
+                <div class="table-wrapper fade-in">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Model</th>
+                                <th>Memory<br><small>(Avg %)</small></th>
+                                <th>Understanding<br><small>(Avg %)</small></th>
+                                <th>Cross-Memory<br><small>(Avg %)</small></th>
+                                <th>Overall<br><small>(Avg %)</small></th>
+                                <th>MPT<br><small>(minutes)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-1">
+                                <td>🥇 1</td>
+                                <td class="model-name">GPT-4o</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr class="rank-2">
+                                <td>🥈 2</td>
+                                <td class="model-name">Gemini-2.5-Pro</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="model-name">MiniCPM-o</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="model-name">Qwen2.5-VL-2.5</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="model-name">Videochat-Online</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="model-name">Qwen2.5-Omni</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--text-light);">
+                🚀 Be among the first to submit your results! <a href="#submit" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Submit now →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Evaluation Metrics Section -->
+    <section id="metrics">
+        <div class="container">
+            <h2>📊 Evaluation Metrics</h2>
+            
+            <div class="metric-card fade-in">
+                <div class="metric-title">⚡ Real-Time Accuracy (RTA)</div>
+                <p>
+                    Measures whether the model can produce a correct answer <strong>within the decision window</strong> 
+                    (time interval between question arrival and deadline). This reflects practical usability 
+                    in streaming scenarios.
+                </p>
+                <div class="metric-formula">
+                    RTA = (# correctly answered within decision window) / (# total questions)
+                </div>
+                <p style="margin-top: 15px; font-size: 0.95em; color: var(--text-light);">
+                    Only the <em>first correct output</em> within the decision window receives credit.
+                </p>
+            </div>
+
+            <div class="metric-card fade-in">
+                <div class="metric-title">⏱️ Memory Persistence Time (MPT)</div>
+                <p>
+                    Among questions initially answered correctly, MPT measures <strong>how long the model can still recover 
+                    the correct answer without re-exposure</strong> to the underlying evidence.
+                </p>
+                <div class="metric-formula">
+                    MPT = Average retention time across correctly answered items
+                </div>
+                <p style="margin-top: 15px; font-size: 0.95em; color: var(--text-light);">
+                    Higher MPT indicates better long-horizon memory retention.
+                </p>
+            </div>
+
+            <h3 style="text-align: center; margin-top: 60px;">Auditable Evidence Compliance</h3>
+            <p style="text-align: center; max-width: 800px; margin: 20px auto 40px;">
+                Every QA item includes <strong>time-stamped evidence spans</strong> and <strong>required-modality tags</strong>. 
+                Systems must localize verifiable support from the correct modalities.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🎯</span>
+                    <h4>Temporal Grounding</h4>
+                    <p>Models must identify the exact time intervals containing relevant evidence, preventing vague or hallucinated responses.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🔊</span>
+                    <h4>Modality Compliance</h4>
+                    <p>Each question specifies required modalities (video, speech, narration). Answers must draw from the correct sources.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">📝</span>
+                    <h4>Evidence Overlap</h4>
+                    <p>Submitted evidence must overlap with annotated spans, enabling quantitative assessment of retrieval quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset Section -->
+    <section id="dataset" class="alt-bg">
+        <div class="container">
+            <h2>Dataset & Scenarios</h2>
+            
+            <!-- ======= Modified scenarios grid: 4 items in one row on desktop ======= -->
+            <div class="feature-grid scenarios">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">💼</span>
+                    <h4>Work &amp; Study</h4>
+                    <p>Meetings, focused learning, research, and collaborative tasks.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🏡</span>
+                    <h4>Lifestyle &amp; Routines</h4>
+                    <p>Daily habits, home organization, wellness, and time management.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">👥</span>
+                    <h4>Social Activities</h4>
+                    <p>Conversations, gatherings, group coordination, and shared events.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🎭</span>
+                    <h4>Outings &amp; Culture</h4>
+                    <p>Dining, entertainment, museums, concerts, and city exploration.</p>
+                </div>
+            </div>
+            <!-- ======= End modified scenarios grid ======= -->
+
+            <h3 style="text-align: center; margin-top: 60px;">Multi-Modal Streams</h3>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-icon">🎥</div>
+                    <div class="timeline-content">
+                        <h4 style="color: var(--primary-color); margin-bottom: 10px;">Egocentric Video</h4>
+                        <p>Continuous first-person visual stream captured from wearable cameras</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-icon">🔊</div>
+                    <div class="timeline-content">
+                        <h4 style="color: var(--primary-color); margin-bottom: 10px;">Speech & Ambient Audio</h4>
+                        <p>Full audio track including conversations and environmental sounds</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-icon">📝</div>
+                    <div class="timeline-content">
+                        <h4 style="color: var(--primary-color); margin-bottom: 10px;">Visual Narration</h4>
+                        <p>Human-authored descriptions of visual events with precise timestamps</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-icon">💬</div>
+                    <div class="timeline-content">
+                        <h4 style="color: var(--primary-color); margin-bottom: 10px;">ASR Transcripts</h4>
+                        <p>Automatic speech recognition text aligned with audio stream</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Section -->
+    <section id="submit">
+        <div class="container">
+            <h2>📤 Submit Your Results</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.15em;">
+                We welcome submissions from all researchers! Choose one of the methods below to submit your model's evaluation results.
+            </p>
+
+            <!-- Method 1: GitHub Pull Request -->
+            <div class="submit-method fade-in">
+                <h3>
+                    <span class="method-icon">🔀</span>
+                    Method 1: GitHub Pull Request (Recommended)
+                </h3>
+                <p style="font-size: 1.05em; margin: 20px 0;">
+                    This is the preferred method for official leaderboard submissions. Your results will be reviewed and added to the leaderboard.
+                </p>
+
+                <div class="submit-steps">
+                    <strong style="display: block; margin-bottom: 15px; font-size: 1.1em;">📝 Steps:</strong>
+                    <ol>
+                        <li>Fork our repository: <a href="https://github.com/Programmergg/TeleEgo" target="_blank" style="color: var(--primary-color);">github.com/Programmergg/TeleEgo</a></li>
+                        <li>Create a new directory under <code>submissions/</code> with your model name:<br>
+                            <code>submissions/your-model-name-YYYY-MM-DD/</code>
+                        </li>
+                        <li>Add your submission files (see requirements below)</li>
+                        <li>Create a pull request with the title: <code>[Submission] Your Model Name</code></li>
+                        <li>Our team will review and merge your submission within 3-5 business days</li>
+                    </ol>
+                </div>
+
+                <div class="requirements-box">
+                    <h4>📋 Required Files:</h4>
+                    <ul>
+                        <li><code>results.json</code> - Your model's predictions (see format below)</li>
+                        <li><code>metadata.json</code> - Model information and configuration</li>
+                        <li><code>README.md</code> - Brief description of your model and approach</li>
+                        <li>(Optional) <code>paper.pdf</code> - Technical paper if available</li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" style="margin-top: 25px;">
+                    <a href="https://github.com/Programmergg/TeleEgo/fork" class="btn btn-primary" target="_blank">
+                        🍴 Fork Repository
+                    </a>
+                    <a href="https://github.com/Programmergg/TeleEgo/tree/main/submissions" class="btn" target="_blank">
+                        📂 View Example Submissions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Method 2: GitHub Issue -->
+            <div class="submit-method fade-in">
+                <h3>
+                    <span class="method-icon">💬</span>
+                    Method 2: GitHub Issue
+                </h3>
+                <p style="font-size: 1.05em; margin: 20px 0;">
+                    For quick submissions or if you're unable to create a pull request, you can submit via GitHub Issues.
+                </p>
+
+                <div class="submit-steps">
+                    <strong style="display: block; margin-bottom: 15px; font-size: 1.1em;">📝 Steps:</strong>
+                    <ol>
+                        <li>Go to our <a href="https://github.com/Programmergg/TeleEgo/issues" target="_blank" style="color: var(--primary-color);">Issues page</a></li>
+                        <li>Click "New Issue" and select the "Submission" template</li>
+                        <li>Fill in all required information in the template</li>
+                        <li>Attach your <code>results.json</code> and <code>metadata.json</code> files</li>
+                        <li>Submit the issue and we'll process your submission</li>
+                    </ol>
+                </div>
+
+                <div class="btn-group" style="margin-top: 25px;">
+                    <a href="https://github.com/Programmergg/TeleEgo/issues/new?template=submission.md" class="btn btn-primary" target="_blank">
+                        ✉️ Create Submission Issue
+                    </a>
+                </div>
+            </div>
+
+            <!-- Method 3: Email -->
+            <div class="submit-method fade-in">
+                <h3>
+                    <span class="method-icon">📧</span>
+                    Method 3: Email Submission
+                </h3>
+                <p style="font-size: 1.05em; margin: 20px 0;">
+                    If GitHub is not accessible, you can email your submission directly to our team.
+                </p>
+
+                <div class="submit-steps">
+                    <strong style="display: block; margin-bottom: 15px; font-size: 1.1em;">📝 Steps:</strong>
+                    <ol>
+                        <li>Prepare your submission files as a ZIP archive</li>
+                        <li>Include all required files: <code>results.json</code>, <code>metadata.json</code>, <code>README.md</code></li>
+                        <li>Email to: <a href="mailto:chengxuyuangg@gmail.com" style="color: var(--primary-color); font-weight: 600;">chengxuyuangg@gmail.com</a></li>
+                        <li>Use subject line: <code>[TeleEgo Submission] Your Model Name</code></li>
+                        <li>We'll confirm receipt within 48 hours</li>
+                    </ol>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Note:</strong> Email submissions may take longer to process than GitHub submissions. 
+                    Please allow 5-7 business days for review.
+                </div>
+            </div>
+
+            <!-- JSON Format Specifications -->
+            <h3 style="text-align: center; margin-top: 80px; margin-bottom: 30px;">📄 Submission Format</h3>
+            
+            <div class="requirements-box">
+                <h4>results.json Format:</h4>
+                <p style="margin-bottom: 15px;">Your prediction results for each question in the test set.</p>
+                <div class="json-example">
+{
+  <span class="json-key">"submission_info"</span>: {
+    <span class="json-key">"model_name"</span>: <span class="json-string">"YourModel-v1.0"</span>,
+    <span class="json-key">"submission_date"</span>: <span class="json-string">"2025-01-15"</span>,
+    <span class="json-key">"team"</span>: <span class="json-string">"Your Organization"</span>
+  },
+  <span class="json-key">"predictions"</span>: [
+    {
+      <span class="json-key">"question_id"</span>: <span class="json-string">"Q001"</span>,
+      <span class="json-key">"answer"</span>: <span class="json-string">"Your model's answer"</span>,
+      <!-- <span class="json-key">"confidence"</span>: <span class="json-number">0.95</span>, -->
+      <span class="json-key">"response_time"</span>: <span class="json-number">2.5</span>,
+      <span class="json-key">"evidence_spans"</span>: [
+        {
+          <!-- <span class="json-key">"start_time"</span>: <span class="json-number">120.5</span>, -->
+          <!-- <span class="json-key">"end_time"</span>: <span class="json-number">135.2</span>, -->
+          <span class="json-key">"modality"</span>: <span class="json-string">""video", "audio", "text""</span>
+        }
+      ]
+    }
+  ]
+}
+                </div>
+            </div>
+
+            <div class="requirements-box" style="margin-top: 30px;">
+                <h4>metadata.json Format:</h4>
+                <p style="margin-bottom: 15px;">Information about your model and experimental setup.</p>
+                <div class="json-example">
+{
+  <span class="json-key">"model_name"</span>: <span class="json-string">"YourModel-v1.0"</span>,
+  <span class="json-key">"organization"</span>: <span class="json-string">"Your Organization"</span>,
+  <span class="json-key">"authors"</span>: [<span class="json-string">"Author 1"</span>, <span class="json-string">"Author 2"</span>],
+  <span class="json-key">"contact_email"</span>: <span class="json-string">"your-email@example.com"</span>,
+  <span class="json-key">"paper_url"</span>: <span class="json-string">"https://arXiv.org/abs/..."</span>,
+  <span class="json-key">"code_url"</span>: <span class="json-string">"https://github.com/..."</span>,
+  <span class="json-key">"model_description"</span>: <span class="json-string">"Brief description of your approach"</span>,
+  <span class="json-key">"model_parameters"</span>: <span class="json-string">"7B"</span>,
+  <span class="json-key">"training_data"</span>: <span class="json-string">"Description of training data used"</span>,
+  <span class="json-key">"modalities_used"</span>: [<span class="json-string">"video"</span>, <span class="json-string">"audio"</span>, <span class="json-string">"text"</span>],
+  <span class="json-key">"inference_time"</span>: <span class="json-string">"Average time per question"</span>
+}
+                </div>
+            </div>
+
+            <div class="warning-box" style="margin-top: 40px;">
+                <strong>⚠️ Important Guidelines:</strong>
+                <ul style="margin-top: 15px; margin-left: 20px; line-height: 2;">
+                    <li>Ensure your results are reproducible</li>
+                    <li>Do not use the test set for training or hyperparameter tuning</li>
+                    <li>Provide complete information in metadata.json</li>
+                    <li>Include evidence spans for all predictions when possible</li>
+                    <li>Follow the exact JSON format specified above</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px; padding: 40px; background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1)); border-radius: 20px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">Need Help?</h3>
+                <p style="font-size: 1.1em; margin-bottom: 25px;">
+                    If you have questions about the submission process, please:
+                </p>
+                <div class="btn-group">
+                    <a href="https://github.com/Programmergg/TeleEgo/issues" class="btn" target="_blank">
+                        💬 Ask on GitHub
+                    </a>
+                    <a href="mailto:chengxuyuangg@gmail.com" class="btn">
+                        📧 Email Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation" class="alt-bg">
+        <div class="container">
+            <h2>Citation</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1em;">
+                If you find TeleEgo useful in your research, please cite our paper:
+            </p>
+
+            <div class="citation-box fade-in">
+<code>
+    @misc{yan2025teleegobenchmarkingegocentricai,
+      title={TeleEgo: Benchmarking Egocentric AI Assistants in the Wild}, 
+      author={Jiaqi Yan and Ruilong Ren and Jingren Liu and Shuning Xu and Ling Wang and Yiheng Wang and Yun Wang and Long Zhang and Xiangyu Chen and Changzhi Sun and Jixiang Luo and Dell Zhang and Hao Sun and Chi Zhang and Xuelong Li},
+      year={2025},
+      eprint={2510.23981},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2510.23981}, 
+
+    }
+</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li>📧 Email: chengxuyuangg@gmail.com</li>
+                <li>💬 GitHub Issues: <a href="https://github.com/Programmergg/TeleEgo/issues" target="_blank">Report Issues</a></li>
+            </ul>
+            <p style="margin-top: 40px;">© 2025 TeleEgo Benchmark. All rights reserved.</p>
+            <p>Developed and maintained by <a href="https://github.com/Tele-AI" target="_blank">TeleAI.</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
