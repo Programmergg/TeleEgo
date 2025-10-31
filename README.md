@@ -12,7 +12,7 @@
     <a href="https://arxiv.org/abs/2510.23981">
       <img alt="arXiv" src="https://img.shields.io/badge/ArXiv-2510.23981-b31b1b.svg">
     </a>
-    <a href="https://programmergg.github.io/jrliu.github.io/">
+    <a href="https://teleai-uagi.github.io/TeleEgo/">
       <img alt="Page" src="https://img.shields.io/badge/Project Page-Link-green">
     </a>
   </p>
